@@ -43,6 +43,21 @@ export default function Home() {
     threshold: 0.1
   })
 
+  const [particles, setParticles] = useState<{x:number, y:number, scale:number, delay:number, duration:number}[]>([])
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setParticles(
+        [...Array(20)].map(() => ({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          scale: Math.random() * 0.5 + 0.5,
+          delay: Math.random() * 2,
+          duration: Math.random() * 2 + 2
+        }))
+      )
+    }
+  }, [])
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
@@ -236,23 +251,23 @@ export default function Home() {
 
         {/* Add particle effects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
+          {particles.map((particle, i) => (
             <motion.div
               key={i}
               className="absolute w-2 h-2 bg-primary rounded-full"
               initial={{
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                scale: Math.random() * 0.5 + 0.5
+                x: particle.x,
+                y: particle.y,
+                scale: particle.scale
               }}
               animate={{
                 y: [0, -20, 0],
                 opacity: [0.5, 1, 0.5]
               }}
               transition={{
-                duration: Math.random() * 2 + 2,
+                duration: particle.duration,
                 repeat: Infinity,
-                delay: Math.random() * 2
+                delay: particle.delay
               }}
             />
           ))}

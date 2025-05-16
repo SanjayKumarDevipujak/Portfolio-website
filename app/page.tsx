@@ -170,14 +170,50 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mb-8 flex flex-col items-center"
             >
-              <Image
-                src="/Sanjaykumar.png.jpg"
-                alt="Profile photo of SanjayKumar Devipujak"
-                width={120}
-                height={120}
-                className="rounded-full border-4 border-primary shadow-lg object-cover"
-                priority
-              />
+              {/* Circular Profile Photo Card with Hover Effect */}
+              <motion.div
+                className="relative w-[250px] h-[250px] perspective-1000"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <motion.div
+                  className="relative w-full h-full transition-transform duration-500 preserve-3d"
+                  whileHover={{ rotateY: 180 }}
+                >
+                  {/* Front of Card */}
+                  <motion.div className="absolute w-full h-full backface-hidden">
+                    <Image
+                      src="/Sanjaykumar.png.jpg"
+                      alt="Profile photo of SanjayKumar Devipujak"
+                      width={250}
+                      height={250}
+                      className="rounded-full shadow-xl object-cover w-full h-full border-4 border-primary"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-full" />
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-center">
+                      <h3 className="text-xl font-bold">SanjayKumar</h3>
+                      <p className="text-sm">Full Stack Developer</p>
+                    </div>
+                  </motion.div>
+
+                  {/* Back of Card */}
+                  <motion.div className="absolute w-full h-full backface-hidden rotate-y-180">
+                    <Image
+                      src="/profile-back.jpg"
+                      alt="Profile photo of SanjayKumar Devipujak"
+                      width={250}
+                      height={250}
+                      className="rounded-full shadow-xl object-cover w-full h-full border-4 border-primary"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-full" />
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-center">
+                      <h3 className="text-xl font-bold">Skills</h3>
+                      <p className="text-sm">React • Node.js • TypeScript</p>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
               <FaCode className="w-20 h-20 mx-auto text-primary mt-4" />
             </motion.div>
             

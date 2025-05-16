@@ -171,6 +171,28 @@ body {
   .scroll-top-btn:hover {
     @apply bg-secondary shadow-xl;
   }
+
+  /* 3D Card Effect Styles */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  /* Add smooth transition for all transforms */
+  * {
+    transition: transform 0.5s ease-in-out;
+  }
 }
 
 @keyframes moveLine {

@@ -67,7 +67,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
       {/* Navigation Bar */}
       <motion.nav
         initial={{ y: -100 }}
@@ -148,7 +148,7 @@ export default function Home() {
         <div className="decorative-circle bottom-40 left-20" />
         <div className="decorative-dot bottom-20 right-10" />
         
-        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-5xl relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-5xl relative z-10 overflow-x-hidden">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -274,8 +274,8 @@ export default function Home() {
       </section>
 
       {/* Main Content */}
-      <main className="flex-grow">
-        <div className="container mx-auto px-4 py-12 max-w-5xl relative">
+      <main className="flex-grow overflow-x-hidden">
+        <div className="container mx-auto px-4 py-12 max-w-5xl relative overflow-x-hidden">
           {/* Header Section */}
           <motion.div 
             ref={headerRef}

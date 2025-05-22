@@ -29,8 +29,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="bg-gradient-to-br from-light to-gray-100 min-h-screen">
-        <main className="min-h-screen">
+      <body className="bg-gradient-to-br from-light to-gray-100 min-h-screen overflow-x-hidden">
+        <main className="min-h-screen w-full overflow-x-hidden">
           {children}
         </main>
       </body>

@@ -7,14 +7,12 @@ import { FaWhatsapp } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
-// Animation configurations for consistent motion effects throughout the app
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.5 }
 }
 
-// Stagger effect configuration for sequential animation of child elements
 const staggerContainer = {
   animate: {
     transition: {
@@ -23,23 +21,18 @@ const staggerContainer = {
   }
 }
 
-// Individual item animation configuration
 const item = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 }
 }
 
 export default function Home() {
-  // State management for mobile menu and scroll effects
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  
-  // Scroll progress tracking for parallax effects
   const { scrollYProgress } = useScroll()
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1])
   const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1])
 
-  // Intersection Observer hooks for scroll-based animations
   const [headerRef, headerInView] = useInView({
     triggerOnce: true,
     threshold: 0.1
@@ -50,7 +43,6 @@ export default function Home() {
     threshold: 0.1
   })
 
-  // Particle effect state and initialization
   const [particles, setParticles] = useState<{x:number, y:number, scale:number, delay:number, duration:number}[]>([])
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -66,7 +58,6 @@ export default function Home() {
     }
   }, [])
 
-  // Scroll event listener for navbar background effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
@@ -77,7 +68,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Responsive Navigation Bar with scroll-based background change */}
+      {/* Navigation Bar */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -150,14 +141,14 @@ export default function Home() {
         </motion.div>
       </motion.nav>
 
-      {/* Hero Section with animated profile and social links */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-light to-gray-100">
         <div className="decorative-circle top-20 left-10" />
         <div className="decorative-dot top-40 right-20" />
         <div className="decorative-circle bottom-40 left-20" />
         <div className="decorative-dot bottom-20 right-10" />
         
-        <div className="container mx-auto px-4 py-12 max-w-5xl relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-5xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -168,60 +159,23 @@ export default function Home() {
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mb-8 flex flex-col items-center"
+              className="mb-6 sm:mb-8 flex flex-col items-center"
             >
-              {/* Circular Profile Photo Card with Hover Effect */}
-              <motion.div
-                className="relative w-[250px] h-[250px] perspective-1000"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <motion.div
-                  className="relative w-full h-full transition-transform duration-500 preserve-3d"
-                  whileHover={{ rotateY: 180 }}
-                >
-                  {/* Front of Card */}
-                  <motion.div className="absolute w-full h-full backface-hidden">
-                    <Image
-                      src="/Sanjaykumar.png.jpg"
-                      alt="Profile photo of SanjayKumar Devipujak"
-                      width={250}
-                      height={250}
-                      className="rounded-full shadow-xl object-cover w-full h-full border-4 border-primary"
-                      priority
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-full" />
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-center">
-                      <h3 className="text-xl font-bold">SanjayKumar</h3>
-                      <p className="text-sm">Full Stack Developer</p>
-                    </div>
-                  </motion.div>
-
-                  {/* Back of Card */}
-                  <motion.div className="absolute w-full h-full backface-hidden rotate-y-180">
-                    <Image
-                      src="/profile-back.jpg"
-                      alt="Profile photo of SanjayKumar Devipujak"
-                      width={250}
-                      height={250}
-                      className="rounded-full shadow-xl object-cover w-full h-full border-4 border-primary"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-full" />
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-center">
-                      <h3 className="text-xl font-bold">Skills</h3>
-                      <p className="text-sm">React • Node.js • TypeScript</p>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </motion.div>
-              <FaCode className="w-20 h-20 mx-auto text-primary mt-4" />
+              <Image
+                src="/Sanjaykumar.png.jpg"
+                alt="Profile photo of SanjayKumar Devipujak"
+                width={120}
+                height={120}
+                className="rounded-full border-4 border-primary shadow-lg object-cover w-[100px] h-[100px] sm:w-[120px] sm:h-[120px]"
+                priority
+              />
             </motion.div>
             
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-6xl md:text-7xl font-heading font-bold mb-6 gradient-text"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold mb-4 sm:mb-6 gradient-text break-words"
             >
               SanjayKumar Devipujak
             </motion.h1>
@@ -230,19 +184,17 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="text-2xl md:text-3xl text-gray-600 mb-8"
+              className="text-xl sm:text-2xl md:text-3xl text-gray-600 mb-6 sm:mb-8"
             >
               Full Stack Developer
             </motion.p>
             
-            {/* Social Media Links Section with animated icons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="flex justify-center space-x-6 mb-12"
+              className="flex justify-center space-x-4 sm:space-x-6 mb-8 sm:mb-12"
             >
-              {/* Social media links with hover animations and color-coded icons */}
               {[
                 { icon: FaGithub, href: "https://github.com/SanjayKumarDevipujak", color: "#181717" },
                 { icon: FaLinkedin, href: "https://www.linkedin.com/in/sanjaykumar-devipujak-7aa952365", color: "#0077B5" },
@@ -259,21 +211,19 @@ export default function Home() {
                   whileHover={{ scale: 1.2, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <social.icon size={32} color={social.color} />
+                  <social.icon size={28} className="sm:w-8 sm:h-8" color={social.color} />
                 </motion.a>
               ))}
             </motion.div>
             
-            {/* Call-to-Action Buttons with hover effects */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
-              className="flex justify-center space-x-4"
+              className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
             >
-              {/* Resume Download Button */}
               <motion.button
-                className="btn-primary inline-flex items-center space-x-2"
+                className="btn-primary inline-flex items-center justify-center space-x-2 w-full sm:w-auto"
                 whileHover={{ 
                   scale: 1.05,
                   boxShadow: "0 0 20px rgba(37, 99, 235, 0.3)"
@@ -284,9 +234,8 @@ export default function Home() {
                 <span>Download Resume</span>
               </motion.button>
               
-              {/* Contact Button */}
               <motion.button
-                className="btn-primary inline-flex items-center space-x-2 bg-secondary"
+                className="btn-primary inline-flex items-center justify-center space-x-2 bg-secondary w-full sm:w-auto"
                 whileHover={{ 
                   scale: 1.05,
                   boxShadow: "0 0 20px rgba(30, 64, 175, 0.3)"
@@ -299,7 +248,7 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Animated Background Particles */}
+        {/* Add particle effects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {particles.map((particle, i) => (
             <motion.div
@@ -335,13 +284,11 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16 relative"
           >
-            {/* Decorative Animated Lines */}
             <div className="animated-line top-0" />
             <div className="animated-line bottom-0" />
             <div className="animated-line-vertical left-0" />
             <div className="animated-line-vertical right-0" />
             
-            {/* Animated Title and Subtitle */}
             <motion.div
               style={{ scale, opacity }}
               className="relative"
@@ -364,14 +311,12 @@ export default function Home() {
               </motion.p>
             </motion.div>
 
-            {/* Social Links with Stagger Animation */}
             <motion.div 
               className="flex justify-center space-x-6 mb-8"
               variants={staggerContainer}
               initial="initial"
               animate={headerInView ? "animate" : "initial"}
             >
-              {/* Social media links repeated with different styling */}
               {[
                 { icon: FaGithub, href: "https://github.com/SanjayKumarDevipujak", color: "#181717" },
                 { icon: FaLinkedin, href: "https://www.linkedin.com/in/sanjaykumar-devipujak-7aa952365", color: "#0077B5" },
@@ -394,7 +339,6 @@ export default function Home() {
               ))}
             </motion.div>
 
-            {/* Resume Download Button with Spring Animation */}
             <motion.button
               className="btn-primary inline-flex items-center space-x-2"
               whileHover={{ 
@@ -427,7 +371,6 @@ export default function Home() {
             >
               About Me
             </motion.h2>
-            {/* About Card with Hover Effect */}
             <motion.div 
               className="card"
               whileHover={{ 
@@ -444,7 +387,7 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Experience Section with Animated Timeline */}
+          {/* Experience Section */}
           <motion.div 
             id="experience"
             {...fadeInUp}
@@ -454,7 +397,6 @@ export default function Home() {
             <div className="animated-line top-0" />
             <h2 className="section-title">Experience</h2>
             <div className="space-y-8">
-              {/* Experience Card with Hover Animation */}
               <motion.div 
                 className="card"
                 whileHover={{ 
@@ -467,7 +409,6 @@ export default function Home() {
                 <div className="animated-line-vertical left-0" />
                 <h3 className="text-2xl font-heading font-semibold text-dark mb-2">Senior Developer</h3>
                 <p className="text-accent mb-4">Company Name • 2020 - Present</p>
-                {/* Animated Achievement List */}
                 <ul className="list-disc list-inside text-gray-700 space-y-3">
                   <motion.li
                     initial={{ opacity: 0, x: -20 }}
@@ -495,7 +436,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Skills Section with Grid Layout */}
+          {/* Skills Section */}
           <motion.div 
             id="skills"
             {...fadeInUp}
@@ -504,7 +445,6 @@ export default function Home() {
           >
             <div className="animated-line top-0" />
             <h2 className="section-title">Skills</h2>
-            {/* Skills Card with Hover Effect */}
             <motion.div 
               className="card"
               whileHover={{ 
@@ -514,9 +454,7 @@ export default function Home() {
             >
               <div className="animated-line top-0" />
               <div className="animated-line-vertical right-0" />
-              {/* Responsive Skills Grid */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {/* Animated Skill Tags */}
                 {['React', 'Node.js', 'TypeScript', 'Python', 'AWS', 'Docker'].map((skill, index) => (
                   <motion.div
                     key={skill}
@@ -536,7 +474,7 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Projects Section with Card Layout */}
+          {/* Projects Section */}
           <motion.div 
             id="projects"
             {...fadeInUp}
@@ -545,9 +483,7 @@ export default function Home() {
           >
             <div className="animated-line top-0" />
             <h2 className="section-title">Projects</h2>
-            {/* Responsive Project Grid */}
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Project Card with Hover Animation */}
               <motion.div 
                 className="card"
                 whileHover={{ 
@@ -560,7 +496,6 @@ export default function Home() {
                 <div className="animated-line-vertical left-0" />
                 <h3 className="text-2xl font-heading font-semibold text-dark mb-2">Project Name</h3>
                 <p className="text-gray-600 mb-4">A brief description of the project and your role in it.</p>
-                {/* Technology Tags */}
                 <div className="flex flex-wrap gap-2">
                   <motion.span 
                     className="px-3 py-1 bg-gray-100 rounded-full text-sm font-medium"
@@ -579,7 +514,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Education Section with Animation */}
+          {/* Education Section */}
           <motion.div 
             {...fadeInUp}
             transition={{ delay: 1 }}
@@ -587,7 +522,6 @@ export default function Home() {
           >
             <div className="animated-line top-0" />
             <h2 className="section-title">Education</h2>
-            {/* Education Card with Hover Effect */}
             <motion.div 
               className="card"
               whileHover={{ 
@@ -605,13 +539,11 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer Section with Social Links */}
+      {/* Footer */}
       <footer className="bg-dark text-white py-12 relative overflow-hidden">
         <div className="animated-line top-0" />
         <div className="container mx-auto px-4 max-w-5xl">
-          {/* Footer Grid Layout */}
           <div className="grid md:grid-cols-3 gap-8">
-            {/* About Section */}
             <div>
               <h3 className="text-2xl font-heading font-bold mb-4">SanjayKumar Devipujak</h3>
               <p className="text-gray-400">
@@ -619,7 +551,6 @@ export default function Home() {
               </p>
             </div>
             
-            {/* Quick Links Navigation */}
             <div>
               <h4 className="text-xl font-heading font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2">
@@ -630,11 +561,9 @@ export default function Home() {
               </ul>
             </div>
             
-            {/* Social Media Links */}
             <div>
               <h4 className="text-xl font-heading font-semibold mb-4">Connect</h4>
               <div className="flex space-x-4">
-                {/* Social Icons with Hover Effects */}
                 {[
                   { icon: FaGithub, href: "https://github.com/SanjayKumarDevipujak", color: "#181717" },
                   { icon: FaLinkedin, href: "https://www.linkedin.com/in/sanjaykumar-devipujak-7aa952365", color: "#0077B5" },
@@ -656,7 +585,6 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Copyright Section with Animated Heart */}
           <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
             <p className="flex items-center justify-center space-x-2">
               <span>Made with</span>

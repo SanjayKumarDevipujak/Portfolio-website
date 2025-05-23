@@ -6,6 +6,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaInstagram, FaArrowDown,
 import { FaWhatsapp } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Logo from './components/Logo'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -78,14 +79,7 @@ export default function Home() {
       >
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-2xl font-heading font-bold gradient-text"
-            >
-              SanjayKumar
-            </motion.div>
+            <Logo />
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
@@ -229,6 +223,15 @@ export default function Home() {
                   boxShadow: "0 0 20px rgba(37, 99, 235, 0.3)"
                 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  // Create a temporary link element
+                  const link = document.createElement('a');
+                  link.href = '/resume.pdf'; // This will be your resume PDF file
+                  link.download = 'SanjayKumar_Resume.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
               >
                 <FaDownload />
                 <span>Download Resume</span>
@@ -241,7 +244,11 @@ export default function Home() {
                   boxShadow: "0 0 20px rgba(30, 64, 175, 0.3)"
                 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  window.open('https://wa.me/919106749266?text=Hi%2C%20I%20would%20like%20to%20connect%20with%20you', '_blank');
+                }}
               >
+                <FaWhatsapp className="mr-2" />
                 <span>Contact Me</span>
               </motion.button>
             </motion.div>
@@ -347,9 +354,28 @@ export default function Home() {
               }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              onClick={() => {
+                window.location.href = 'mailto:sanjaybhaidevipujak31@gmail.com?subject=Hello%20SanjayKumar%20-%20Let\'s%20Connect';
+              }}
             >
               <FaDownload />
               <span>Download Resume</span>
+            </motion.button>
+
+            <motion.button
+              className="btn-primary inline-flex items-center space-x-2 bg-secondary ml-4"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 0 20px rgba(30, 64, 175, 0.3)"
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              onClick={() => {
+                window.open('https://www.linkedin.com/in/sanjaykumar-devipujak-7aa952365', '_blank');
+              }}
+            >
+              <FaLinkedin className="mr-2" />
+              <span>Contact Me</span>
             </motion.button>
           </motion.div>
 
